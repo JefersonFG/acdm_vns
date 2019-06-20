@@ -13,7 +13,7 @@ parser.add_argument('input_file', type=str, help='File containing the process li
 args = parser.parse_args()
 initial_process_list = persistence.read_input(args.input_file)
 
-time_limit = 60
+time_limit = 3600
 num_neighborhoods = 2
 
 solution = vns.vns(initial_process_list, num_neighborhoods, time_limit)

@@ -22,8 +22,8 @@ def check_solution_is_valid(process_list: list, solution: list):
 
 def test_get_schedule():
     """Checks that the get schedule function returns the correct times for the processes."""
-    process_list = [1, 2, 4, 1, 3]
-    expected_solution = [0, 1, 3, 4, 6]
+    process_list = [91, 38, 58, 16]
+    expected_solution = [0, 38, 76, 92]
 
     solution = get_schedule(process_list)
 

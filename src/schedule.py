@@ -10,21 +10,16 @@ def get_schedule(process_list: list) -> list:
 
     for i in range(1, len(process_list)):
         current_length = process_list[i]
-        next_start = schedule[i - 1]
+        minimum_start_list = []
 
         for j in range(i):
             previous_start = schedule[j]
             previous_length = process_list[j]
-            distance = abs(previous_start - next_start)
             min_length = min(current_length, previous_length)
 
-            if distance < min_length:
-                minimum_next_start = schedule[i - 1] + min_length - distance
+            minimum_start_list.append(previous_start + min_length)
 
-                if next_start == schedule[i - 1] or minimum_next_start < next_start:
-                    next_start = minimum_next_start
-
-        schedule.append(next_start)
+        schedule.append(max(minimum_start_list))
 
     return schedule
 
