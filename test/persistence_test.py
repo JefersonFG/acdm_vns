@@ -25,7 +25,7 @@ def test_log_step():
     schedule = [0, 1, 3]
     value = 6
 
-    expected_line = "Process list: [1, 2, 3] - Schedule: [0, 1, 3] - Value: 6"
+    expected_line = "Makespan: 6 - Schedule: [0, 1, 3] - Process list: [1, 2, 3]"
 
     with Logger(cleanup=True) as persistence:
         persistence.log_step(process_list, schedule, value)

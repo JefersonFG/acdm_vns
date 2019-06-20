@@ -7,8 +7,9 @@ def test_first_improvement():
     """Checks that the first improvement function returns the first best solution."""
     process_list = [1, 2, 4, 1, 3]
     expected_solution = [2, 1, 4, 1, 3]
+    current_neighborhood = 0
 
-    first_solution = first_improvement(process_list, NEIGHBORHOOD_LIST[0])
+    first_solution = first_improvement(process_list, current_neighborhood)
     assert first_solution == expected_solution
 
 
@@ -16,8 +17,9 @@ def test_best_improvement():
     """Checks that the best improvement function checks all possible solutions and returns the best."""
     process_list = [1, 2, 4, 1, 3]
     expected_solution = [3, 1, 4, 2, 1]
+    current_neighborhood = 0
 
-    best_solution = best_improvement(process_list, NEIGHBORHOOD_LIST[0])
+    best_solution = best_improvement(process_list, current_neighborhood)
     assert best_solution == expected_solution
 
 
