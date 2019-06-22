@@ -5,20 +5,13 @@ import itertools
 import src.schedule as schedule_function
 
 
-NEIGHBORHOOD_LIST = [2, 3]
-
-
 def first_improvement(current_solution: list, neighborhood: int) -> list:
     """Returns the first neighbor that shows improvement over the previous solution."""
-    neighbor_generators = itertools.combinations(range(len(current_solution)), NEIGHBORHOOD_LIST[neighborhood])
+    neighbor_generators = itertools.combinations(range(len(current_solution)), neighborhood + 2)
     original_makespan = schedule_function.get_makespan(current_solution)
 
     for neighbor_generator in neighbor_generators:
-        if neighborhood == 0:
-            neighbor = schedule_function.swap_two_processes(current_solution, neighbor_generator)
-        else:
-            neighbor = schedule_function.swap_three_processes(current_solution, neighbor_generator)
-
+        neighbor = schedule_function.swap_processes(current_solution, neighbor_generator)
         neighbor_makespan = schedule_function.get_makespan(neighbor)
 
         if neighbor_makespan < original_makespan:
@@ -29,18 +22,14 @@ def first_improvement(current_solution: list, neighborhood: int) -> list:
 
 def best_improvement(current_solution: list, neighborhood: int) -> list:
     """Checks the values of every neighbor and returns the one with the best improvement."""
-    neighbor_generators = itertools.combinations(range(len(current_solution)), NEIGHBORHOOD_LIST[neighborhood])
+    neighbor_generators = itertools.combinations(range(len(current_solution)), neighborhood + 2)
     best_neighbor = []
 
     original_makespan = schedule_function.get_makespan(current_solution)
     minimum_makespan = math.inf
 
     for neighbor_generator in neighbor_generators:
-        if neighborhood == 0:
-            neighbor = schedule_function.swap_two_processes(current_solution, neighbor_generator)
-        else:
-            neighbor = schedule_function.swap_three_processes(current_solution, neighbor_generator)
-
+        neighbor = schedule_function.swap_processes(current_solution, neighbor_generator)
         neighbor_makespan = schedule_function.get_makespan(neighbor)
 
         if neighbor_makespan < minimum_makespan:

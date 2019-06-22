@@ -29,16 +29,15 @@ class Logger:
     def __enter__(self):
         return self
 
-    def log_step(self, process_list: list, schedule: list, value: int, output=False):
-        """Writes the current solution and value obtained in the local search."""
-        log_line = "Makespan: " + str(value) + " - Schedule: "\
-                   + str(schedule) + " - Process list: " + str(process_list) + '\n'
+    def log_step(self, value: int, time: float, output=False):
+        """Writes the current solution and time run to reach it on csv format."""
+        log_line = str(value) + ',' + str(time) + '\n'
 
         with open(self.log_file, 'a') as file:
             file.write(log_line)
 
         if output:
-            print(log_line)
+            print("Makespan: " + str(value) + " - Time run: " + str(time))
 
     def __exit__(self, exc_type, exc_value, traceback):
         """Removes the log file from persistence, used on tests."""

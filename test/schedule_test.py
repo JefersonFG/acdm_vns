@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from copy import deepcopy
 from src.schedule import *
 
 
@@ -38,7 +39,7 @@ def test_swap_two_processes():
     expected_process_list = [2, 1, 4, 1, 3]
     expected_schedule = [0, 1, 2, 3, 5]
 
-    swapped_list = swap_two_processes(process_list, (0, 1))
+    swapped_list = swap_processes(process_list, (0, 1))
     swapped_schedule = get_schedule(swapped_list)
 
     check_solution_is_valid(swapped_list, swapped_schedule)
@@ -53,7 +54,7 @@ def test_swap_three_processes():
     expected_process_list = [1, 1, 4, 3, 2]
     expected_schedule = [0, 1, 2, 5, 7]
 
-    swapped_list = swap_three_processes(process_list, (1, 3, 4))
+    swapped_list = swap_processes(process_list, (1, 3, 4))
     swapped_schedule = get_schedule(swapped_list)
 
     check_solution_is_valid(swapped_list, swapped_schedule)
@@ -63,12 +64,14 @@ def test_swap_three_processes():
 
 def test_shake_solution():
     """Checks that the shake is deterministic."""
+    random.seed(184604)
+
     process_list = [1, 2, 4, 1, 3]
 
-    expected_process_list = [2, 1, 4, 3, 1]
-    expected_schedule = [0, 1, 2, 5, 6]
+    expected_process_list = [3, 1, 4, 2, 1]
+    expected_schedule = [0, 1, 3, 5, 6]
 
-    shaken_process_list = shake_solution(process_list)
+    shaken_process_list = shake_solution(deepcopy(process_list), 4)
     shaken_schedule = get_schedule(shaken_process_list)
 
     check_solution_is_valid(shaken_process_list, shaken_schedule)

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import random
-import src.helper as helper
 
 
 def get_schedule(process_list: list) -> list:
@@ -24,34 +23,20 @@ def get_schedule(process_list: list) -> list:
     return schedule
 
 
-def swap_two_processes(process_list: list, indexes: tuple) -> list:
-    """Changes the process execution order by swapping two processes and generating a new schedule."""
-    i, j = indexes
-    process_list[i], process_list[j] = process_list[j], process_list[i]
+def swap_processes(process_list: list, indexes: tuple) -> list:
+    """Changes the process execution order by swapping k processes and generating a new schedule."""
+    k = len(indexes)
+    for i in range(k - 1):
+        process_list[indexes[i]], process_list[indexes[i + 1]] = process_list[indexes[i + 1]], process_list[indexes[i]]
 
     return process_list
 
 
-def swap_three_processes(process_list: list, indexes: tuple) -> list:
-    """Changes the process execution order by swapping three processes and generating a new schedule."""
-    i, j, k = indexes
-    process_list[i], process_list[j], process_list[k] = process_list[j], process_list[k], process_list[i]
-
-    return process_list
-
-
-def shake_solution(process_list: list) -> list:
+def shake_solution(process_list: list, shake_length: int) -> list:
     """Uses a pseudo random number generator to swap k values on the current solution."""
-    k = 4
     num_processes = len(process_list)
-
-    helper.set_random_seed()
-    index1, index2, index3, index4 = random.sample(range(num_processes), k)
-
-    process_list[index1], process_list[index2], process_list[index3], process_list[index4] =\
-        process_list[index4], process_list[index3], process_list[index2], process_list[index1]
-
-    return process_list
+    indexes = random.sample(range(num_processes), shake_length)
+    return swap_processes(process_list, indexes)
 
 
 def get_makespan(process_list: list) -> int:

@@ -21,14 +21,13 @@ def test_read_input():
 
 def test_log_step():
     """Test that the logger correctly logs the search info."""
-    process_list = [1, 2, 3]
-    schedule = [0, 1, 3]
-    value = 6
+    makespan = 6
+    time_run = 360.54
 
-    expected_line = "Makespan: 6 - Schedule: [0, 1, 3] - Process list: [1, 2, 3]"
+    expected_line = "6,360.54"
 
     with Logger(cleanup=True) as persistence:
-        persistence.log_step(process_list, schedule, value)
+        persistence.log_step(makespan, time_run)
 
         with open(persistence.log_file, 'r') as file:
             lines = file.read().splitlines()

@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from src.helper import *
+import src.helper as helper
 
 
-def test_set_random_seed():
-    """Checks that the random seed is set once, if it set twice the same number will be generated."""
-    set_random_seed()
-    a = random.randint(0, 10)
+def str2bool_test():
+    """Checks that the conversion function accepts different boolean representations."""
+    assert helper.str2bool("1")
+    assert not helper.str2bool("0")
 
-    set_random_seed()
-    b = random.randint(0, 10)
+    assert helper.str2bool("true")
+    assert not helper.str2bool("false")
 
-    assert a != b
+    assert helper.str2bool("True")
+    assert not helper.str2bool("False")
+
+    assert helper.str2bool("t")
+    assert not helper.str2bool("f")
+
+    assert helper.str2bool("T")
+    assert not helper.str2bool("F")
