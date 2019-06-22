@@ -9,7 +9,7 @@ def test_first_improvement():
     expected_solution = [2, 1, 4, 1, 3]
     current_neighborhood = 0
 
-    first_solution = first_improvement(process_list, current_neighborhood)
+    first_solution = first_improvement(process_list, current_neighborhood, 60)
     assert first_solution == expected_solution
 
 
@@ -19,7 +19,7 @@ def test_best_improvement():
     expected_solution = [3, 1, 4, 2, 1]
     current_neighborhood = 0
 
-    best_solution = best_improvement(process_list, current_neighborhood)
+    best_solution = best_improvement(process_list, current_neighborhood, 60)
     assert best_solution == expected_solution
 
 
