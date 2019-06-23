@@ -23,8 +23,6 @@ parser.add_argument('random_seed', type=int, nargs='?', default=184604,
                     help='Seed for the RNG, same seed and parameters wield the same results, default 184604')
 parser.add_argument('execution_time', type=int, nargs='?', default=60,
                     help='Time for which to run the algorithm in seconds, default 60')
-parser.add_argument('max_iterations', type=int, nargs='?', default=math.inf,
-                    help='Maximum number of iterations between improvements, defaults to no limit')
 
 args = parser.parse_args()
 
@@ -35,14 +33,13 @@ shake_length = args.shake_length
 use_best_improvement = args.use_best_improvement
 random_seed = args.random_seed
 execution_time = args.execution_time
-max_iterations = args.max_iterations
 
 try:
     initial_process_list = read_input(input_file)
     random.seed(random_seed)
 
     solution = vns(initial_process_list, num_neighborhoods, execution_time,
-                   use_best_improvement, shake_length, max_iterations)
+                   use_best_improvement, shake_length)
 
     print("Best solution: {}\n".format(get_makespan(solution)))
 

@@ -8,7 +8,7 @@ from src.persistence import Logger
 
 
 def vns(current_solution: list, num_neighborhoods: int, max_time: int,
-        use_best_improvement: bool, shake_length: int, max_iterations: int) -> list:
+        use_best_improvement: bool, shake_length: int) -> list:
     """Implementation of VNS algorithm, runs until max_time is reached."""
     logger = Logger()
     time_limit = timer() + max_time
@@ -40,10 +40,5 @@ def vns(current_solution: list, num_neighborhoods: int, max_time: int,
 
             if current_solution == candidate_solution:
                 logger.log_step(get_makespan(current_solution), time_elapsed, True)
-            else:
-                iterations += 1
-                if iterations == max_iterations:
-                    iterations = 1
-                    current_neighborhood += 1
 
     return current_solution
